@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Подсчёт фруктов</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <div class="badge">Computer Vision</div>
+        <h1>Подсчёт фруктов на изображениях</h1>
+        <p>Загрузите изображение — система посчитает фрукты и покажет результат детектирования.</p>
+      </header>
+
+      <section class="card">
+        <h2>Загрузка изображения</h2>
+        <p class="hint">Форматы: {{ allowed_ext }} · Максимум: {{ max_file_mb }} МБ</p>
+        {% if supported_fruits %}
+          <p class="hint">Модель определяет фрукты: {{ supported_fruits }}</p>
+        {% endif %}
+        {% if error %}
+          <div class="error">{{ error }}</div>
+        {% endif %}
+        <form action="/process" method="post" enctype="multipart/form-data" class="upload-form">
+          <input type="file" name="image" accept="image/*" required />
+          <button type="submit">Запустить подсчёт</button>
+        </form>
+      </section>
+
+      {% if result %}
+      <section class="card">
+        <h2>Результат</h2>
+        <div class="result-grid">
+          <div>
+            <img src="{{ result.output_url }}" alt="Результат детектирования" />
+          </div>
+          <div>
+            <p class="result-total">{{ result.total }}</p>
+            <p class="result-caption">Всего обнаружено фруктов</p>
+            <div class="meta">
+              <p><strong>Время обработки:</strong> {{ result.processing_ms }} мс</p>
+              <p><strong>Дата:</strong> {{ result.created_at }}</p>
+            </div>
+            {% if result.counts %}
+              <div class="counts">
+                <h3>По классам</h3>
+                <ul>
+                  {% for name, count in result.counts.items() %}
+                    <li>{{ name }}: {{ count }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </section>
+      {% endif %}
+
+      <section class="card">
+        <h2>Статистика</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <p class="stat-title">Запросов</p>
+            <p class="stat-value">{{ summary.total_requests }}</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-title">Всего фруктов</p>
+            <p class="stat-value">{{ summary.total_fruits }}</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-title">Среднее на изображение</p>
+            <p class="stat-value">{{ '%.2f'|format(summary.avg_per_request) }}</p>
+          </div>
+        </div>
+        <div class="counts-summary">
+          <h3>Суммарно по классам</h3>
+          {% if counts_by_class %}
+            <ul>
+              {% for name, count in counts_by_class.items() %}
+                <li>{{ name }}: {{ count }}</li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>Пока нет данных.</p>
+          {% endif %}
+        </div>
+        <p class="report-link"><a href="/report.pdf">Скачать PDF‑отчёт</a></p>
+      </section>
+
+      <section class="card">
+        <h2>История запросов</h2>
+        {% if recent %}
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Файл</th>
+                <th>Фрукты</th>
+                <th>Дата</th>
+                <th>Время, мс</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in recent %}
+              <tr>
+                <td>{{ row.id }}</td>
+                <td>{{ row.filename }}</td>
+                <td>{{ row.total_count }}</td>
+                <td>{{ row.created_at }}</td>
+                <td>{{ row.processing_ms }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+          <p>Запросов пока нет.</p>
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>

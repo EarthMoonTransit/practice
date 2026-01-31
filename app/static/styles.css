@@ -1,0 +1,262 @@
+:root {
+  color-scheme: light;
+  font-family: "Iowan Old Style", "Palatino", "Georgia", serif;
+  color: #231f1a;
+  background: #f7f2eb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 10%, #f7efe1, transparent 40%),
+    radial-gradient(circle at 80% 0%, #f2e6d3, transparent 45%),
+    linear-gradient(160deg, #fbf7f0, #efe3d5);
+  color: inherit;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 36px 20px 80px;
+  display: grid;
+  gap: 20px;
+}
+
+.header {
+  text-align: left;
+  padding: 26px 28px;
+  border-radius: 22px;
+  background: linear-gradient(120deg, #fff8ee, #f5e7d6);
+  border: 1px solid #e9d8c4;
+  box-shadow: 0 20px 50px rgba(89, 67, 51, 0.12);
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.header h1 {
+  font-size: 2.7rem;
+  margin: 10px 0 8px;
+  letter-spacing: -0.5px;
+}
+
+.header p {
+  margin: 0;
+  color: #5b4b3b;
+  font-size: 1.05rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #9b4e3b;
+  background: #fbeee0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #f1d6c2;
+}
+
+.card {
+  background: #fffaf3;
+  border: 1px solid #ead9c5;
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 16px 36px rgba(73, 54, 39, 0.08);
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.hint {
+  color: #7a624f;
+  margin-top: 6px;
+}
+
+.upload-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.upload-form input[type="file"] {
+  flex: 1;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px dashed #d6bda3;
+  background: #fffdf8;
+}
+
+button {
+  background: linear-gradient(120deg, #d15338, #eb6a4c);
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 10px 20px rgba(211, 83, 56, 0.2);
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 24px rgba(211, 83, 56, 0.28);
+}
+
+.error {
+  background: #ffe7e2;
+  border: 1px solid #f3b7ab;
+  color: #8a2f1e;
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: minmax(240px, 1.2fr) minmax(200px, 0.8fr);
+  gap: 20px;
+  align-items: center;
+}
+
+.result-grid img {
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid #e0d5c9;
+  box-shadow: 0 12px 24px rgba(66, 48, 33, 0.12);
+}
+
+.result-total {
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin: 0;
+  color: #b2462c;
+}
+
+.result-caption {
+  margin: 0 0 16px;
+  color: #7b5945;
+}
+
+.meta p {
+  margin: 6px 0;
+  color: #4e3d30;
+}
+
+.counts {
+  margin-top: 14px;
+}
+
+.counts h3,
+.counts-summary h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  color: #6e4a3a;
+}
+
+.counts ul,
+.counts-summary ul {
+  margin: 0;
+  padding-left: 18px;
+  color: #4e3d30;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.stat-card {
+  background: #fff3e4;
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid #f0d7bf;
+}
+
+.stat-title {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  color: #876553;
+}
+
+.stat-value {
+  margin: 6px 0 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.report-link {
+  margin-top: 14px;
+}
+
+.report-link a {
+  color: #b2462c;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.counts-summary {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: #fff3e4;
+  border: 1px solid #f0d7bf;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid #ead9c5;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fffdf9;
+}
+
+th,
+td {
+  border-bottom: 1px solid #f0e3d4;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+th {
+  background: #f7efe4;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6f5441;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 860px) {
+  .result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .upload-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
